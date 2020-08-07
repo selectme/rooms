@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create room</title>
+</head>
+<body>
+
+<form action="/rooms/create" th:object="${room}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}"  id="name" placeholder="Name" required>
+
+
+    <select class="form-control" th:field="*{country}"  id="country" required>
+        <option th:each="country : ${countries}" th:value="${country.value}" th:text="${country.key}"></option>
+    </select>
+
+    <input type="submit" value="Create Room">
+</form>
+
+
+</body>
+</html>

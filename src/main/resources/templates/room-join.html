@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Join to room</title>
+</head>
+<body>
+
+<form action="/rooms/join" th:object="${user}" method="post">
+    <input type="hidden" name="roomId" th:value="${room.roomId}" readonly="readonly">
+    <label>Room title</label>
+    <input type="text" th:attr="placeholder=${room.name}" readonly="readonly">
+
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name"  placeholder="Name" required>
+    <input type="submit" value="Join to room">
+</form>
+
+</body>
+</html>

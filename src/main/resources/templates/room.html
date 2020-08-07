@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+
+</head>
+<body>
+<a th:href="@{/rooms}">All rooms</a>
+<p th:text="${room.name}"></p>
+
+<button id="onBtn" name="on">ON</button>
+<button id="offBtn" name="off" hidden>off</button>
+
+<table>
+    <thead>
+    <tr>
+        <th>Users</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.name}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<script>let roomId = [[${room.roomId}]];</script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

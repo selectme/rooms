@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms</title>
+</head>
+<body>
+
+<div th:switch="${rooms}">
+    <h2 th:case="null">No rooms!</h2>
+    <div th:case="*">
+        <h2>Available rooms</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Country</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.roomId}"></td>
+                <td th:text="${room.name}"></td>
+                <td th:text="${room.country}"></td>
+                <td><a th:href="@{/rooms/{roomId}/join(roomId=${room.roomId})}">Join</a></td>
+<!--                <td><a th:href="@{rooms/{roomId}(roomId=${room.roomId})}">Join</a></td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/rooms/create">Create room</a></p>
+</div>
+
+</body>
+</html>
