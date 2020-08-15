@@ -11,7 +11,13 @@ import org.springframework.util.Assert;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Arrays;
 
+/**
+ * Implementation of {@link IpResolverService}.
+ *
+ * @see IpResolverService
+ */
 @Service
 public class IpResolverServiceImpl implements IpResolverService {
 
@@ -19,7 +25,7 @@ public class IpResolverServiceImpl implements IpResolverService {
     private String ipDatabasePath;
 
     @Value("${localhost.ip}")
-    private String localhostIp;
+    private String[] localhostIpValues;
 
     @Value("${local.country.code}")
     private String localCountryCode;
@@ -36,12 +42,12 @@ public class IpResolverServiceImpl implements IpResolverService {
             CountryResponse response = databaseReader.country(ipAddress);
             countryCode = response.getCountry().getIsoCode();
         } catch (GeoIp2Exception e) {
-            if (userIp.equals(localhostIp)) {
+            if (Arrays.asList(localhostIpValues).contains(userIp)) {
                 countryCode = localCountryCode;
             } else {
                 throw new IllegalArgumentException("IP " + userIp + " was not found in the database.");
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new IllegalStateException("IO exception has occurred.", e);
         }
         return countryCode;

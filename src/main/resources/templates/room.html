@@ -5,28 +5,35 @@
     <meta charset="UTF-8">
     <title>Room</title>
 
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
-<a th:href="@{/rooms}">All rooms</a>
-<p th:text="${room.name}"></p>
 
-<button id="onBtn" name="on">ON</button>
-<button id="offBtn" name="off" hidden>off</button>
+<div id="room" class="container">
 
-<table>
-    <thead>
-    <tr>
-        <th>Users</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.name}"></td>
-    </tr>
-    </tbody>
-</table>
+    <div>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" th:href="@{/rooms}">All rooms</a>
+            <a class="navbar-brand" th:text="${room.name}"></a>
+            <a class="navbar-brand" th:href="@{/rooms/leave}">Leave</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div id="lightOff">
+            <button class="btn-primary" id="onBtn">ON</button>
+            <img th:src="@{/images/lightOff.svg}"/>
+        </div>
+        <div id="lightOn">
+            <button class="btn-secondary" id="offBtn">OFF</button>
+            <img th:src="@{/images/lightOn.svg}"/>
+        </div>
+    </div>
+
+</div>
 
 <script>let roomId = [[${room.roomId}]];</script>
 <script th:src="@{/js/main.js}"></script>

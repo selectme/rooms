@@ -7,9 +7,11 @@ import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+/**
+ * Model object that represents a room.
+ */
 @Data
 @Entity
 @Table(name = "rooms")
@@ -27,7 +29,7 @@ public class Room {
     private String country;
 
     @Embedded
-    private Lamp lamp;
+    private Lamp lamp = new Lamp();
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     @ToString.Exclude
@@ -40,5 +42,4 @@ public class Room {
         user.setRoom(this);
         this.users.add(user);
     }
-
 }

@@ -6,6 +6,13 @@ import net.its.testtask.rooms.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import javax.transaction.Transactional;
+
+/**
+ * Implementation of {@link UserService}
+ *
+ * @see UserService
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -15,10 +22,19 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Override
-    public void createUser(User user) {
-        Assert.notNull(user, "user must not be null");
 
-        userRepository.save(user);
+    @Override
+    public User findUserByIp(String ip) {
+        Assert.hasText(ip, "ip must not be empty");
+
+        return userRepository.findByIp(ip);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUserByIp(String ip) {
+        Assert.hasText(ip, "ip must not be empty");
+
+        userRepository.deleteByIp(ip);
     }
 }

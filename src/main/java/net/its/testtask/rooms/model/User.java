@@ -6,6 +6,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/**
+ * Model object that represents a user.
+ */
 @Data
 @Entity
 @Table(name = "users")
@@ -19,8 +22,14 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "ip", unique = true)
+    private String ip;
+
+    /**
+     * The room {@link Room} in which this user is located.
+     */
     @ManyToOne
-    @JoinColumn(name = "room_id", nullable = false)
+    @JoinColumn(name = "room_id")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Room room;

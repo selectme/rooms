@@ -4,21 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Create room</title>
+
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
 
-<form action="/rooms/create" th:object="${room}" method="post">
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}"  id="name" placeholder="Name" required>
+<div class="container">
 
-
-    <select class="form-control" th:field="*{country}"  id="country" required>
-        <option th:each="country : ${countries}" th:value="${country.value}" th:text="${country.key}"></option>
-    </select>
-
-    <input type="submit" value="Create Room">
-</form>
-
+    <form action="/rooms/create" th:object="${room}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name"
+                   pattern="^[A-Za-zА-Яа-я\s]+[\.\']?[A-Za-zА-Яа-я\s]*$" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <select class="form-control form-control" th:field="*{country}" id="country" required>
+                <option th:each="country : ${countries}" th:value="${country.value}" th:text="${country.key}"></option>
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

@@ -2,7 +2,6 @@ package net.its.testtask.rooms.service.impl;
 
 import com.neovisionaries.i18n.CountryCode;
 import lombok.AllArgsConstructor;
-import net.its.testtask.rooms.model.Lamp;
 import net.its.testtask.rooms.model.Room;
 import net.its.testtask.rooms.model.User;
 import net.its.testtask.rooms.repository.RoomRepository;
@@ -14,12 +13,16 @@ import org.springframework.util.Assert;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Implementation of {@link RoomService}.
+ *
+ * @see RoomService
+ */
 @Service
 @AllArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
-    private final UserRepository userRepository;
 
     @Override
     public void createRoom(Room room) {
@@ -31,7 +34,6 @@ public class RoomServiceImpl implements RoomService {
         } else {
             room.setCountry(countryCode.getName());
         }
-        room.setLamp(new Lamp());
         roomRepository.save(room);
     }
 
@@ -42,11 +44,10 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional
-    public void addUserToRoom(Long roomId, User user) {
-        Assert.notNull(roomId, "Id must not be null");
+    public void addUserToRoom(Room room, User user) {
+        Assert.notNull(room, "room must not be null");
         Assert.notNull(user, "User must not be null");
 
-        Room room = getRoomById(roomId);
         room.addUser(user);
         roomRepository.save(room);
     }
@@ -60,6 +61,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void switchLight(Room room) {
+        Assert.notNull(room, "room must not be null");
 
         roomRepository.save(room);
     }

@@ -4,18 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Join to room</title>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
 
-<form action="/rooms/join" th:object="${user}" method="post">
-    <input type="hidden" name="roomId" th:value="${room.roomId}" readonly="readonly">
-    <label>Room title</label>
-    <input type="text" th:attr="placeholder=${room.name}" readonly="readonly">
+<div class="container">
+    <div>
+        <form action="/rooms/join" th:object="${user}" method="post">
+            <input type="hidden" name="roomId" th:value="${room.roomId}" readonly="readonly">
+            <div class="form-group row">
+                <label for="staticRoomName" class="col-sm-2 col-form-label">Room title</label>
+                <div class="col-sm-10">
+                    <input type="text" th:attr="placeholder=${room.name}" class="form-control-plaintext"
+                           id="staticRoomName" readonly="readonly">
+                </div>
+            </div>
 
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name"  placeholder="Name" required>
-    <input type="submit" value="Join to room">
-</form>
-
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Join to room</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

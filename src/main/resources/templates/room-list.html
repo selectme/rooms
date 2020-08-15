@@ -4,33 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Rooms</title>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
 
 <div th:switch="${rooms}">
     <h2 th:case="null">No rooms!</h2>
     <div th:case="*">
-        <h2>Available rooms</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Country</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="room : ${rooms}">
-                <td th:text="${room.roomId}"></td>
-                <td th:text="${room.name}"></td>
-                <td th:text="${room.country}"></td>
-                <td><a th:href="@{/rooms/{roomId}/join(roomId=${room.roomId})}">Join</a></td>
-<!--                <td><a th:href="@{rooms/{roomId}(roomId=${room.roomId})}">Join</a></td>-->
-            </tr>
-            </tbody>
-        </table>
+        <div><h2 class="text-center">Available rooms</h2></div>
+        <div class="container">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Country</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="room : ${rooms}">
+                    <td th:text="${room.roomId}"></td>
+                    <td th:text="${room.name}"></td>
+                    <td th:text="${room.country}"></td>
+                    <td th:if="${user == null}">
+                        <a th:href="@{/rooms/{roomId}/join(roomId=${room.roomId})}" class="btn btn-primary btn-sm">Join</a>
+                    </td>
+                    <td th:if="${user != null}">
+                        <a th:if="${user?.room?.roomId == room.roomId}"
+                           th:href="@{/rooms/{roomId}(roomId=${room.roomId})}" class="btn btn-secondary btn-sm">Back
+                            to room</a>
+                        <a th:if="${user?.room?.roomId != room.roomId}"
+                           th:href="@{/rooms/{roomId}/join(roomId=${room.roomId})}" class="btn btn-primary btn-sm">Join</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p><a href="/rooms/create" class="btn btn-primary btn-lg">Create room</a></p>
+        </div>
     </div>
-    <p><a href="/rooms/create">Create room</a></p>
+
 </div>
 
 </body>
