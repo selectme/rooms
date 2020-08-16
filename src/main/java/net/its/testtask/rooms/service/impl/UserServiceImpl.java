@@ -1,5 +1,6 @@
 package net.its.testtask.rooms.service.impl;
 
+import lombok.AllArgsConstructor;
 import net.its.testtask.rooms.model.User;
 import net.its.testtask.rooms.repository.UserRepository;
 import net.its.testtask.rooms.service.UserService;
@@ -14,14 +15,10 @@ import javax.transaction.Transactional;
  * @see UserService
  */
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
 
     @Override
     public User findUserByIp(String ip) {

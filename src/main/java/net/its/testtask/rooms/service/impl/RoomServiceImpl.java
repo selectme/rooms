@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import net.its.testtask.rooms.model.Room;
 import net.its.testtask.rooms.model.User;
 import net.its.testtask.rooms.repository.RoomRepository;
-import net.its.testtask.rooms.repository.UserRepository;
 import net.its.testtask.rooms.service.RoomService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;

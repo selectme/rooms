@@ -5,11 +5,12 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CountryResponse;
 import net.its.testtask.rooms.service.IpResolverService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.Arrays;
 
@@ -20,6 +21,7 @@ import java.util.Arrays;
  */
 @Service
 public class IpResolverServiceImpl implements IpResolverService {
+
 
     @Value("${ip.db.path}")
     private String ipDatabasePath;
@@ -36,7 +38,8 @@ public class IpResolverServiceImpl implements IpResolverService {
 
         String countryCode;
         try {
-            File dbFile = new File(ipDatabasePath);
+            InputStream dbFile = new ClassPathResource(
+                    ipDatabasePath).getInputStream();
             DatabaseReader databaseReader = new DatabaseReader.Builder(dbFile).build();
             InetAddress ipAddress = InetAddress.getByName(userIp);
             CountryResponse response = databaseReader.country(ipAddress);

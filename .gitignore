@@ -17,5 +17,3 @@ target/
 *.ipr
 
 application-local.properties
-
-data

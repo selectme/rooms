@@ -217,21 +217,21 @@ public class RoomController {
         return "redirect:/rooms";
     }
 
-//    /**
-//     * Allows to get a state of {@link Lamp} of concrete {@link Room}.
-//     *
-//     * @param roomId id of {@link Room}
-//     * @return {@code true} if {@link Lamp} state is on, {@code false} otherwise
-//     */
-//    @GetMapping("/{roomId}/lamp")
-//    @ResponseBody
-//    public boolean getLampState(@PathVariable(name = "roomId") Long roomId) {
-//        Assert.notNull(roomId, "roomId must not be null.");
-//
-//        Room room = roomService.getRoomById(roomId);
-//
-//        return room.getLamp().isOn();
-//    }
+    /**
+     * Allows to get a state of {@link Lamp} of concrete {@link Room}.
+     *
+     * @param roomId id of {@link Room}
+     * @return {@code true} if {@link Lamp} state is on, {@code false} otherwise
+     */
+    @GetMapping("/{roomId}/lamp")
+    @ResponseBody
+    public boolean getLampState(@PathVariable(name = "roomId") Long roomId) {
+        Assert.notNull(roomId, "roomId must not be null.");
+
+        Room room = roomService.getRoomById(roomId);
+
+        return room.getLamp().isOn();
+    }
 
     private String getIp(HttpServletRequest request) {
 

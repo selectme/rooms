@@ -29,14 +29,16 @@
                     <td th:text="${room.name}"></td>
                     <td th:text="${room.country}"></td>
                     <td th:if="${user == null}">
-                        <a th:href="@{/rooms/{roomId}/join(roomId=${room.roomId})}" class="btn btn-primary btn-sm">Join</a>
+                        <a th:href="@{/rooms/{roomId}/join(roomId=${room.roomId})}"
+                           class="btn btn-primary btn-sm">Join</a>
                     </td>
                     <td th:if="${user != null}">
                         <a th:if="${user?.room?.roomId == room.roomId}"
                            th:href="@{/rooms/{roomId}(roomId=${room.roomId})}" class="btn btn-secondary btn-sm">Back
                             to room</a>
                         <a th:if="${user?.room?.roomId != room.roomId}"
-                           th:href="@{/rooms/{roomId}/join(roomId=${room.roomId})}" class="btn btn-primary btn-sm">Join</a>
+                           th:href="@{/rooms/{roomId}/join(roomId=${room.roomId})}"
+                           class="btn btn-primary btn-sm">Join</a>
                     </td>
                 </tr>
                 </tbody>
